@@ -15,42 +15,44 @@ class Experience
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(["getExperiences", "getCandidates"])]
+    #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getExperiences", "getCandidates"])]
+    #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
     private ?string $positionTitle = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(["getExperiences", "getCandidates"])]
+    #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
     private ?string $description = null;
 
     #[ORM\Column(length: 30)]
-    #[Groups(["getExperiences", "getCandidates"])]
+    #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
     private ?string $sector = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(["getExperiences", "getCandidates"])]
+    #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
     private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    #[Groups(["getExperiences", "getCandidates"])]
+    #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column]
-    #[Groups(["getExperiences", "getCandidates"])]
+    #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
     private ?bool $isCurrentPosition = null;
 
     #[ORM\ManyToOne(inversedBy: 'experiences')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(["getExperiences"])]
+    #[Groups(["getExperiences", "getExperiencesProfile"])]
     private ?Candidate $candidate = null;
 
     #[ORM\OneToMany(mappedBy: 'experience', targetEntity: ExperienceProfile::class)]
+    #[Groups(["getExperiences"])]
     private Collection $experienceProfiles;
 
     public function __construct()

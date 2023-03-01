@@ -15,15 +15,15 @@ class Candidate
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["getCandidates"])]
+    #[Groups(["getCandidates", "getExperiences", "getExperiencesProfile"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(["getCandidates"])]
+    #[Groups(["getCandidates", "getExperiences"])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(["getCandidates"])]
+    #[Groups(["getCandidates", "getExperiences"])]
     private ?string $firstName = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

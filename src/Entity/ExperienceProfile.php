@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ExperienceProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ExperienceProfileRepository::class)]
 class ExperienceProfile
@@ -11,47 +12,20 @@ class ExperienceProfile
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["getExperiencesProfile", "getProfiles"])]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idProfile = null;
-
-    #[ORM\Column]
-    private ?int $idExperience = null;
-
     #[ORM\ManyToOne(inversedBy: 'experienceProfiles')]
+    #[Groups(["getExperiencesProfile"])]
     private ?Profile $profile = null;
 
     #[ORM\ManyToOne(inversedBy: 'experienceProfiles')]
+    #[Groups(["getExperiencesProfile"])]
     private ?Experience $experience = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdProfile(): ?int
-    {
-        return $this->idProfile;
-    }
-
-    public function setIdProfile(int $idProfile): self
-    {
-        $this->idProfile = $idProfile;
-
-        return $this;
-    }
-
-    public function getIdExperience(): ?int
-    {
-        return $this->idExperience;
-    }
-
-    public function setIdExperience(int $idExperience): self
-    {
-        $this->idExperience = $idExperience;
-
-        return $this;
     }
 
     public function getProfile(): ?Profile

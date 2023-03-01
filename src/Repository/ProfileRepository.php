@@ -39,6 +39,24 @@ class ProfileRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return []
+     */
+    public function getCandidateProfile(int $candidateId): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM candidate_profile_view p
+            WHERE p.candidate_id = :candidateId
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['candidateId' => $candidateId]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Profile[] Returns an array of Profile objects
 //     */
