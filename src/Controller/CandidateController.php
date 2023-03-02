@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use App\Repository\CandidateRepository;
+use App\Repository\ProfileRepository;
 use App\Entity\Candidate;
 
 class CandidateController extends AbstractController

@@ -39,25 +39,23 @@ class ExperienceProfileRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return ExperienceProfile[] Returns an array of ExperienceProfile objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return ExperienceProfile[] Returns an array of ExperienceProfile objects
+    */
+   public function findByProfile($idProfile): array
+   {
+       return $this->createQueryBuilder('experienceProfile')
+           ->andWhere('experienceProfile.profile = :idProfile')
+           ->setParameter('idProfile', $idProfile)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?ExperienceProfile
 //    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
+//        return $this->createQueryBuilder('experienceProfile')
+//            ->andWhere('experienceProfile.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

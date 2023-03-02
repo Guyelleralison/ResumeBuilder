@@ -28,13 +28,13 @@ class ExperienceProfileController extends AbstractController
         return new JsonResponse($jsonExperienceProfiles, Response::HTTP_OK, [], true);
     }
 
-    #[Route('/api/experience/profiles/{id}', name: 'app_experience_profile_detail', methods:['GET'])]
-    public function getProfile(
-        ExperienceProfile $experienceProfile,
+    #[Route('/api/experience/profiles/{idProfile}', name: 'app_experience_profile_detail', methods:['GET'])]
+    public function getExperienceProfileCandidate(
+        int $idProfile,
         SerializerInterface $serializer,
         ExperienceProfileRepository $experienceProfileRepository): JsonResponse
     {
-        $experienceProfileFound = $experienceProfileRepository->find($experienceProfile);
+        $experienceProfileFound = $experienceProfileRepository->findByProfile($idProfile);
         if ($experienceProfileFound) {
             $jsonExperienceProfile = $serializer->serialize($experienceProfileFound, 'json', ['groups'=>'getExperiencesProfile']);
             return new JsonResponse($jsonExperienceProfile, Response::HTTP_OK, [], true);

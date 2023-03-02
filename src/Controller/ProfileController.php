@@ -70,6 +70,16 @@ class ProfileController extends AbstractController
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
 
+    #[Route('/api/candidates/profiles/list', name: 'app_candidate_profile_list', methods:['GET'])]
+    public function getCandidateProfileList(
+        SerializerInterface $serializer,
+        ProfileRepository $profileRepository): JsonResponse
+    {
+        $profile = $profileRepository->getCandidateProfileList();
+        $jsonProfile = $serializer->serialize($profile, 'json');
+        return new JsonResponse($jsonProfile, Response::HTTP_OK, [], true);
+    }
+
     #[Route('/api/profiles/candidate/{id}', name: 'app_candidate_profile', methods:['GET'])]
     public function getCandidateProfile(
         int $id,
