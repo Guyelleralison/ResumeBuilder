@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SkillCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SkillCategoryRepository::class)]
@@ -13,9 +14,11 @@ class SkillCategory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["getCategory"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(["getCategory"])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Skill::class)]

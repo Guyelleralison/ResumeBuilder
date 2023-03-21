@@ -63,20 +63,13 @@ class ExperienceProfileController extends AbstractController
         return new JsonResponse($jsonXPProfile, Response::HTTP_CREATED, ['location' => $location], true);
     }
 
-    #[Route('/api/profiles/{id}', name: 'app_profile_update', methods:['PUT'])]
-    public function updateProfile(
-        Request $request,
-        Profile $profile,
+    #[Route('/api/experience/profiles/{id}', name: 'app_experience_profile_delete', methods:['DELETE'])]
+    public function deleteExperienceProfile(
+        ExperienceProfile $experienceProfile,
         SerializerInterface $serializer,
-        ProfileRepository $profileRepository): JsonResponse
+        ExperienceProfileRepository $experienceProfileRepository): JsonResponse
     {
-        $updatedProfile = $serializer->deserialize(
-            $request->getContent(), 
-            Profile::class, 
-            'json', 
-            [AbstractNormalizer::OBJECT_TO_POPULATE => $profile]);
-
-        $profileRepository->save($updatedProfile, true);
+        $experienceProfileRepository->remove($experienceProfile, true);
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
 }

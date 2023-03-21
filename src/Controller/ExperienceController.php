@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Repository\ExperienceRepository;
 use App\Repository\CandidateRepository;
 use App\Entity\Experience;
@@ -47,11 +48,18 @@ class ExperienceController extends AbstractController
         SerializerInterface $serializer, 
         ExperienceRepository $experienceRepository, 
         UrlGeneratorInterface $urlGenerator,
-        CandidateRepository $candidateRepository
+        CandidateRepository $candidateRepository,
+        ValidatorInterface $validator
     ): JsonResponse 
     {
 
         $experience = $serializer->deserialize($request->getContent(), Experience::class, 'json');
+        $errors = $validator->validate($experience);
+
+        if ($errors->count() > 0) {
+            return new JsonResponse($serializer->serialize($errors, 'json'), JsonResponse::HTTP_BAD_REQUEST, [], true);
+        }
+
         $content = $request->toArray();
         $idCandidate = $content['idCandidate'] ?? -1;
 
@@ -85,5 +93,5 @@ class ExperienceController extends AbstractController
         
         $experienceRepository->save($updatedExperience, true);
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
-   }
+    }
 }

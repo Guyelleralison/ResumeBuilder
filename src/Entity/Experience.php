@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
 class Experience
@@ -20,10 +21,12 @@ class Experience
 
     #[ORM\Column(length: 100)]
     #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
+    #[Assert\NotBlank(message: "Le titre de l'experience est obligatoire")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(["getExperiences", "getCandidates", "getExperiencesProfile"])]
+    #[Assert\NotBlank(message: "Le titre du poste est obligatoire")]
     private ?string $positionTitle = null;
 
     #[ORM\Column(type: Types::TEXT)]
