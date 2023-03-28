@@ -14,11 +14,11 @@ class SkillTechnology
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["getTechnology"])]
+    #[Groups(["getTechnology", "getSkills"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(["getTechnology"])]
+    #[Groups(["getTechnology", "getSkills"])]
     private ?string $name = null;
 
     #[ORM\Column(length: 20, nullable: true)]

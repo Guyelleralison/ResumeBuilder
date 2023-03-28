@@ -16,8 +16,8 @@ use App\Entity\SkillTechnology;
 
 class SkillTechnologyController extends AbstractController
 {
-        #[Route('/api/skill/technology', methods: ['GET'],  name: 'app_skill_technology')]
-    public function getSkillCategories(SkillTechnologyRepository $skillTechnologyRepository, SerializerInterface $serializer): JsonResponse
+    #[Route('/api/skill/technology', methods: ['GET'],  name: 'app_skill_technology')]
+    public function getSkillTechnologies(SkillTechnologyRepository $skillTechnologyRepository, SerializerInterface $serializer): JsonResponse
     {
         $skillTechnologyList = $skillTechnologyRepository->findAll();
         $jsonskillTechnologyList = $serializer->serialize($skillTechnologyList, 'json', ['groups' => "getTechnology"]);
@@ -25,7 +25,11 @@ class SkillTechnologyController extends AbstractController
     }
 
     #[Route('/api/skill/technology/{id}', methods: ['GET'],  name: 'app_skill_technology_detail')]
-    public function getskillTechnologyDetail(SkillTechnology $skillTechnology, SkillTechnologyRepository $skillTechnologyRepository, SerializerInterface $serializer): JsonResponse
+    public function getskillTechnologyDetail(
+        SkillTechnology $skillTechnology, 
+        SkillTechnologyRepository $skillTechnologyRepository, 
+        SerializerInterface $serializer
+        ): JsonResponse
     {
         if ($skillTechnology) {
             $skillTechnologyJson = $serializer->serialize($skillTechnology, 'json', ['groups'=>'getTechnology']);

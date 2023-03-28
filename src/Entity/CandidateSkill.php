@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CandidateSkillRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CandidateSkillRepository::class)]
 class CandidateSkill
@@ -11,12 +12,15 @@ class CandidateSkill
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["getCandidateSkills"])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(["getCandidateSkills"])]
     private ?int $idSkill = null;
 
     #[ORM\Column]
+    #[Groups(["getCandidateSkills"])]
     private ?int $idCandidate = null;
 
     #[ORM\ManyToOne(inversedBy: 'candidateSkills')]

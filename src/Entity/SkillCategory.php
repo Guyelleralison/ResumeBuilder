@@ -14,11 +14,11 @@ class SkillCategory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["getCategory"])]
+    #[Groups(["getCategory", "getSkills"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(["getCategory"])]
+    #[Groups(["getCategory", "getSkills"])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Skill::class)]
